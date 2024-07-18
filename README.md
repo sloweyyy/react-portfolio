@@ -1,4 +1,4 @@
-![thumbnail](https://user-images.githubusercontent.com/16558205/180779213-ea740975-3df1-460a-a964-0a623ee25872.png)
+![thumbnail](https://github.com/sloweyyy/react-portfolio/blob/main/public/images/demo.png)
 
 ### Live - https://slowey.netlify.app/
 
@@ -8,7 +8,7 @@
 -   Minimal Design
 -   Easy To Browse
 -   Easy To Customize your details With GUI
--   Blog Crud (Create, Read, Update, Delete blog with easy to use UI).
+-   Blog Crud (Create, Read, Update, Delete blog with easy-to-use UI).
 -   Dark Mode
 
 ### Sections
