@@ -225,7 +225,7 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
 
                         <Button
                             onClick={() =>
-                                window.open("mailto:hello@chetanverma.com")
+                                window.open("mailto:sloweycontact@gmail.com")
                             }
                         >
                             Contact
