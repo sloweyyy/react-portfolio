@@ -57,7 +57,7 @@ export default function Home() {
         <div className={`relative ${data.showCursor && "cursor-none"}`}>
             {data.showCursor && <Cursor />}
             <Head>
-                <title>Cool Title</title>
+                <title>SloWey | Portfolio</title>
                 <meta
                     name="description"
                     content="SloWey's developer portfolio"
@@ -70,7 +70,7 @@ export default function Home() {
                 />
                 <meta
                     property="og:image"
-                    content="https://github.com/sloweyyy/react-portfolio/blob/main/public/images/demo.png"
+                    content="https://i.imgur.com/LJAuciv.png"
                 />
             </Head>
 
