@@ -3,6 +3,7 @@ import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import Button from "../Button";
+import ContactForm from "../ContactForm";
 // Local Data
 import data from "../../data/portfolio.json";
 
@@ -12,10 +13,19 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
     const [mounted, setMounted] = useState(false);
 
     const { name, showBlog, showResume } = data;
+    const [showForm, setShowForm] = useState(false);
 
     useEffect(() => {
         setMounted(true);
     }, []);
+
+    const handleScheduleCallClick = () => {
+        setShowForm(true);
+    };
+
+    const handleCloseForm = () => {
+        setShowForm(false);
+    };
 
     return (
         <>
@@ -100,13 +110,7 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
                                         </Button>
                                     )}
 
-                                    <Button
-                                        onClick={() =>
-                                            window.open(
-                                                "mailto:sloweycontact@gmail.com"
-                                            )
-                                        }
-                                    >
+                                    <Button onClick={handleScheduleCallClick}>
                                         Contact
                                     </Button>
                                 </div>
@@ -136,13 +140,7 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
                                         </Button>
                                     )}
 
-                                    <Button
-                                        onClick={() =>
-                                            window.open(
-                                                "mailto:sloweycontact@gmail.com"
-                                            )
-                                        }
-                                    >
+                                    <Button onClick={handleScheduleCallClick}>
                                         Contact
                                     </Button>
                                 </div>
@@ -180,11 +178,7 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
                             </Button>
                         )}
 
-                        <Button
-                            onClick={() =>
-                                window.open("mailto:sloweycontact@gmail.com")
-                            }
-                        >
+                        <Button onClick={handleScheduleCallClick}>
                             Contact
                         </Button>
                         {mounted && theme && data.darkMode && (
@@ -223,11 +217,7 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
                             </Button>
                         )}
 
-                        <Button
-                            onClick={() =>
-                                window.open("mailto:sloweycontact@gmail.com")
-                            }
-                        >
+                        <Button onClick={handleScheduleCallClick}>
                             Contact
                         </Button>
 
@@ -252,6 +242,11 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
                     </div>
                 )}
             </div>
+            {showForm && (
+                <div className="fixed top-0 left-0 w-full h-full z-50 flex items-center justify-center bg-black bg-opacity-50">
+                    <ContactForm onClose={handleCloseForm} />
+                </div>
+            )}
         </>
     );
 };
