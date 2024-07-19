@@ -124,6 +124,7 @@ const ContactForm = ({ onClose }) => {
                     </div>
                     <div className="flex space-x-4">
                         <Button
+                            type={"primary"}
                             onClick={handleSubmit}
                             className={`flex-1 ${
                                 theme === "dark"
