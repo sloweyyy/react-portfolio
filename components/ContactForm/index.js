@@ -6,12 +6,16 @@ const ContactForm = ({ onClose }) => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
+    const [emailError, setEmailError] = useState("");
+    const [formError, setFormError] = useState("");
     const { theme } = useTheme();
     const [mounted, setMounted] = useState(false);
+    const [visible, setVisible] = useState(false);
     const formRef = useRef(null);
 
     useEffect(() => {
         setMounted(true);
+        setVisible(true); // Trigger the fade-in animation
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
@@ -20,12 +24,28 @@ const ContactForm = ({ onClose }) => {
 
     const handleClickOutside = (event) => {
         if (formRef.current && !formRef.current.contains(event.target)) {
-            onClose();
+            handleClose();
         }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Clear previous errors
+        setEmailError("");
+        setFormError("");
+
+        // Basic validation
+        if (!name.trim() || !email.trim() || !message.trim()) {
+            setFormError("All fields are required.");
+            return;
+        }
+
+        // Email validation
+        if (!validateEmail(email)) {
+            setEmailError("Please enter a valid email address.");
+            return;
+        }
 
         try {
             const response = await fetch("/api/contact", {
@@ -42,26 +62,48 @@ const ContactForm = ({ onClose }) => {
 
             const result = await response.json();
             console.log("Form submitted:", result);
-            onClose();
+            handleClose();
         } catch (error) {
             console.error("Error:", error);
         }
     };
 
+    const validateEmail = (email) => {
+        // Basic regex for email validation
+        const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return re.test(String(email).toLowerCase());
+    };
+
+    const handleClose = () => {
+        setVisible(false); // Trigger the fade-out animation
+        setTimeout(() => {
+            onClose();
+        }, 300); // Duration of the fade-out animation
+    };
+
     if (!mounted) return null;
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+        <div
+            className={`fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 transition-opacity duration-300 ${
+                visible ? "opacity-100" : "opacity-0"
+            }`}
+        >
             <div
                 ref={formRef}
                 className={`${
                     theme === "dark"
                         ? "bg-slate-800 text-white"
                         : "bg-white text-black"
-                } rounded-lg shadow-xl p-6 w-full max-w-md`}
+                } rounded-lg shadow-xl p-6 w-full max-w-md transform transition-all duration-300 ${
+                    visible ? "scale-100" : "scale-95"
+                }`}
             >
-                <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
+                <h2 className="text-2xl font-bold mb-4">Contact Me</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
+                    {formError && (
+                        <p className="text-red-500 text-sm mb-2">{formError}</p>
+                    )}
                     <div>
                         <label
                             htmlFor="name"
@@ -101,6 +143,11 @@ const ContactForm = ({ onClose }) => {
                                     : "bg-gray-100 text-black"
                             } border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50`}
                         />
+                        {emailError && (
+                            <p className="text-red-500 text-sm mt-1">
+                                {emailError}
+                            </p>
+                        )}
                     </div>
                     <div>
                         <label
@@ -135,7 +182,7 @@ const ContactForm = ({ onClose }) => {
                             Submit
                         </Button>
                         <Button
-                            onClick={onClose}
+                            onClick={handleClose}
                             className={`flex-1 ${
                                 theme === "dark"
                                     ? "bg-gray-600 text-white"
