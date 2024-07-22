@@ -1,6 +1,6 @@
 ![thumbnail](https://github.com/sloweyyy/react-portfolio/blob/main/public/images/demo.png)
 
-### Live - https://slowey.netlify.app/
+### Live - [https://slowey.netlify.app/](https://www.slowey.works/)
 
 ### Features -
 
