@@ -2,7 +2,7 @@
 
 ### Live - https://www.slowey.works
 
-### Features -
+### Features 
 
 -   Modern Stack (Next.js + TailwindCSS)
 -   Minimal Design
@@ -20,7 +20,7 @@
 -   Contact
 -   Markdown Blog
 
-### Tech Stack Used -
+### Tech Stack Used 
 
 -   Next.js
 -   TailwindCSS
