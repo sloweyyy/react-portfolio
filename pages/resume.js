@@ -22,6 +22,14 @@ const Resume = () => {
             router.push("/");
         }
     }, []);
+
+    const handleDownloadPdf = () => {
+        window.open(
+            "https://docs.google.com/uc?export=download&id=1CC3ocp3PnQtlNHxtB6mgSi8Y9rzRMCZF",
+            "_blank"
+        );
+    };
+
     return (
         <>
             {process.env.NODE_ENV === "development" && (
@@ -34,6 +42,14 @@ const Resume = () => {
                     </Button>
                 </div>
             )}
+            {process.env.NODE_ENV === "production" && (
+                <div className="fixed bottom-6 right-6">
+                    <Button onClick={handleDownloadPdf} type={"primary"}>
+                        Download PDF
+                    </Button>
+                </div>
+            )}
+
             {data.showCursor && <Cursor />}
             <div
                 className={`container mx-auto mb-10 ${
