@@ -19,6 +19,12 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
         setMounted(true);
     }, []);
 
+    useEffect(() => {
+        if (mounted) {
+            document.documentElement.classList.toggle("dark", theme === "dark");
+        }
+    }, [mounted, theme]);
+
     const handleScheduleCallClick = () => {
         setShowForm(true);
     };
@@ -150,8 +156,8 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
                 )}
             </Popover>
             <div
-                className={`mt-10 hidden flex-row items-center justify-between sticky ${
-                    theme === "light" && "bg-white"
+                className={`sticky-header mt-10 hidden flex-row items-center justify-between ${
+                    theme === "light" ? "bg-white" : ""
                 } dark:text-white top-0 z-10 tablet:flex`}
             >
                 <h1

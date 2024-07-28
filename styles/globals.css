@@ -12,6 +12,19 @@ body {
     @apply dark:bg-black dark:text-white;
 }
 
+.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.8); /* Light theme background */
+}
+
+.dark .sticky-header {
+    background: rgba(0, 0, 0, 0.8); /* Dark theme background */
+    color: white; /* Ensure text is white in dark mode */
+}
+
 .gradient-circle {
     position: absolute;
     pointer-events: none;
