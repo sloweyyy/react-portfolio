@@ -15,7 +15,7 @@ const ContactForm = ({ onClose }) => {
 
     useEffect(() => {
         setMounted(true);
-        setVisible(true); // Trigger the fade-in animation
+        setVisible(true);
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
@@ -31,17 +31,14 @@ const ContactForm = ({ onClose }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Clear previous errors
         setEmailError("");
         setFormError("");
 
-        // Basic validation
         if (!name.trim() || !email.trim() || !message.trim()) {
             setFormError("All fields are required.");
             return;
         }
 
-        // Email validation
         if (!validateEmail(email)) {
             setEmailError("Please enter a valid email address.");
             return;
@@ -69,16 +66,15 @@ const ContactForm = ({ onClose }) => {
     };
 
     const validateEmail = (email) => {
-        // Basic regex for email validation
         const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         return re.test(String(email).toLowerCase());
     };
 
     const handleClose = () => {
-        setVisible(false); // Trigger the fade-out animation
+        setVisible(false);
         setTimeout(() => {
             onClose();
-        }, 300); // Duration of the fade-out animation
+        }, 300);
     };
 
     if (!mounted) return null;

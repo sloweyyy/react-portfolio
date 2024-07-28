@@ -1,8 +1,11 @@
 import { google } from "googleapis";
 
 export default async function handler(req, res) {
-    // Check if environment variables are set
-    if (!process.env.CLIENT_EMAIL || !process.env.PRIVATE_KEY) {
+    if (
+        !process.env.CLIENT_EMAIL ||
+        !process.env.PRIVATE_KEY ||
+        !process.env.SPREADSHEET_ID
+    ) {
         return res
             .status(500)
             .json({ error: "Environment variables are not set" });
@@ -11,7 +14,7 @@ export default async function handler(req, res) {
     const auth = new google.auth.GoogleAuth({
         credentials: {
             client_email: process.env.CLIENT_EMAIL,
-            private_key: process.env.PRIVATE_KEY,
+            private_key: process.env.PRIVATE_KEY.replace(/\\n/g, "\n"),
         },
         scopes: ["https://www.googleapis.com/auth/spreadsheets"],
     });
@@ -19,9 +22,14 @@ export default async function handler(req, res) {
     const sheets = google.sheets({ version: "v4", auth });
 
     try {
+        const range = "Contact!A2:C2";
+        console.log(
+            `Appending data to range: ${range} in spreadsheet ID: ${process.env.SPREADSHEET_ID}`
+        );
+
         await sheets.spreadsheets.values.append({
             spreadsheetId: process.env.SPREADSHEET_ID,
-            range: "Sheet1!A:C",
+            range,
             valueInputOption: "RAW",
             resource: {
                 values: [[req.body.name, req.body.email, req.body.message]],
