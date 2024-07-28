@@ -1,11 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Hind:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500;600;700;800;900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 @import "./markdown.css";
-
 * {
-    font-family: "Hind";
+    font-family: "Be Vietnam Pro", sans-serif;
 }
 
 body {
@@ -87,4 +86,18 @@ body {
     left: 0;
     background: inherit;
     border-radius: inherit;
+}
+.be-vietnam-pro-thin {
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-weight: 100;
+}
+
+.be-vietnam-pro-regular {
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-weight: 400;
+}
+
+.be-vietnam-pro-bold {
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-weight: 700;
 }
